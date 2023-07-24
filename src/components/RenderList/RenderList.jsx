@@ -37,7 +37,7 @@ class RenderList extends Component {
         </ul>
       );
     } else {
-      return <div className="empty_info">Brak dostępnych zdjęć</div>;
+      return <div className="empty_info">Brak dostępnych zdjęć.</div>;
     }
   }
 }
