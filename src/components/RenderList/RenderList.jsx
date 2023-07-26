@@ -1,45 +1,40 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Modal from 'components/Modal/Modal';
 import './RenderList.styles.css';
-class RenderList extends Component {
-  state = {
-    selectedImage: null,
+const RenderList = ({ images }) => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const openModal = imageUrl => {
+    setSelectedImage(imageUrl);
   };
 
-  openModal = imageUrl => {
-    this.setState({ selectedImage: imageUrl });
+  const closeModal = () => {
+    setSelectedImage(null);
   };
 
-  closeModal = () => {
-    this.setState({ selectedImage: null });
-  };
-  render() {
-    const { images } = this.props;
-
-    if (images.length > 0) {
-      return (
-        <ul className="gallery">
-          {images.map(el => (
-            <li key={el.id}>
-              <img
-                className="previewImg"
-                alt={el.tags}
-                src={el.webformatURL}
-                onClick={() => this.openModal(el.largeImageURL)}
-              />
-            </li>
-          ))}
-          <Modal
-            isOpen={this.state.selectedImage !== null}
-            imageUrl={this.state.selectedImage}
-            onClose={this.closeModal}
-          />
-        </ul>
-      );
-    } else {
-      return <div className="empty_info">Brak dostępnych zdjęć.</div>;
-    }
+  if (images.length > 0) {
+    return (
+      <ul className="gallery">
+        {images.map(el => (
+          <li key={el.id}>
+            <img
+              className="previewImg"
+              alt={el.tags}
+              src={el.webformatURL}
+              onClick={() => openModal(el.largeImageURL)}
+            />
+          </li>
+        ))}
+        <Modal
+          isOpen={selectedImage !== null}
+          imageUrl={selectedImage}
+          onClose={closeModal}
+        />
+      </ul>
+    );
+  } else {
+    return <div className="empty_info">Brak dostępnych zdjęć.</div>;
   }
-}
+};
 
 export default RenderList;
