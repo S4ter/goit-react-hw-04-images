@@ -20,6 +20,7 @@ const Gallery = () => {
   useEffect(() => {
     fetchFromApi();
     setPage(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limit]);
   useEffect(() => {
     if (inputSearch.length === 0 && images.length < 0) {

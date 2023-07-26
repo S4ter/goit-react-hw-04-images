@@ -12,7 +12,7 @@ const Modal = ({ isOpen, imageUrl, onClose }) => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  });
 
   if (!isOpen) return null;
 
