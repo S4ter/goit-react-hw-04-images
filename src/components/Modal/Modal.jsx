@@ -1,5 +1,5 @@
 import './Modal.styles.css';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 const Modal = ({ isOpen, imageUrl, onClose }) => {
   const handleKeyDown = event => {

@@ -8,7 +8,7 @@ const Gallery = () => {
   const [images, setImages] = useState([]);
   const [inputSearch, setInputSearch] = useState('');
   const [limit, setLimit] = useState(12);
-  const [page, setPage] = useState('1');
+  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const API_KEY = '36730001-9966eb2ff0700192767337e13';
 
@@ -19,6 +19,7 @@ const Gallery = () => {
   };
   useEffect(() => {
     fetchFromApi();
+    setPage(1);
   }, [limit]);
   useEffect(() => {
     if (inputSearch.length === 0 && images.length < 0) {
