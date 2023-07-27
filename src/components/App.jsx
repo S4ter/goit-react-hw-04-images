@@ -12,14 +12,29 @@ const Gallery = () => {
   const [isLoading, setIsLoading] = useState(false);
   const API_KEY = '36730001-9966eb2ff0700192767337e13';
 
+  const scrollDown = () => {
+    window.scrollTo({
+      left: 0,
+      top: document.body.scrollHeight,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    scrollDown();
+  }, [images]);
+
+  // const nextPage = () => {
+  //   setPage(prevPage => prevPage + 1);
+  // };
+
   const changeLimit = () => {
     setLimit(prevLimit => prevLimit + 10);
+    setPage(prevPage => prevPage + 1);
     fetchFromApi();
-    console.log('zmieniam limit');
   };
   useEffect(() => {
     fetchFromApi();
-    setPage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limit]);
   useEffect(() => {
@@ -35,13 +50,13 @@ const Gallery = () => {
 
   const fetchFromApi = async () => {
     setIsLoading(true);
+    setPage(1);
     try {
       // const { inputSearch, limit, page, API_KEY } = this.state;
       const response = await fetch(
         `https://pixabay.com/api/?q=${inputSearch}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=${limit}`
       );
       const data = await response.json();
-
       setImages(data.hits);
     } catch (error) {
       console.log('error', error);
